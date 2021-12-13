@@ -1,0 +1,46 @@
+{
+  "name": "template-for-fullstack-projects",
+  "version": "1.0.0",
+  "description": "a complete template includes webpack, babel rc, index.js app.js and much more",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "serve": "webpack serve",
+    "start": "node index.js",
+    "dev": "nodemon ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zivserphos/template-for-fullstack-projects.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zivserphos/template-for-fullstack-projects/issues"
+  },
+  "homepage": "https://github.com/zivserphos/template-for-fullstack-projects#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.16.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@webpack-cli/generators": "^2.4.1",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.63.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
