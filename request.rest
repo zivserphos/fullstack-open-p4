@@ -1,0 +1,12 @@
+GET http://localhost:3001/api/blogs HTTP/1.1
+
+### 
+POST http://localhost:3001/api/blogs HTTP/1.1
+Content-Type: application/json 
+
+{
+    "title": "nadav HAPAPATIR",
+    "autor": "nadav hagever",
+    "url": "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+    "likes": 121
+}

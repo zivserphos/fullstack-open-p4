@@ -1,14 +1,14 @@
+const http = require("http");
 const express = require("express");
-const cors = require("cors");
-const errorHandler = require("./handlers/errorHandler.js");
 const app = express();
-const path = require("path");
-const mongoose = require("mongoose");
-const env = require("dotenv").config();
+const cors = require("cors");
+const Blog = require("./db/models/blog");
+const ApiRouter = require("./routers/ApiRouter");
+require("./db/mongo");
 
+app.use(cors());
 app.use(express.json());
-app.use("/", express.static(path.resolve(`./dist`)));
 
-app.use("/", errorHandler);
+app.use("/api/blogs", ApiRouter);
 
 module.exports = app;
