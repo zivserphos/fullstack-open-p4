@@ -3,8 +3,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../db/models/User");
 require("dotenv").config();
 const SECRET = process.env.SECRET;
-console.log(SECRET);
-console.log("ZZZZZZZZZZZZZZZZZ");
 const jwtError = () => ({
   status: 401,
   message: { error: "token missing or invalid" },
