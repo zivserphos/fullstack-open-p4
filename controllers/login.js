@@ -1,16 +1,13 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const loginRouter = require("express").Router();
-const User = require("../models/user");
+const mongoose = require("mongoose");
+const User = require("../db/models/User");
 
-loginRouter.post("/", async (request, response) => {
-  const body = request.body;
-
-  const user = await User.findOne({ username: body.username });
+exports.login = async (request, response) => {
+  const { userName, password } = request.body;
+  const user = await User.findOne({ userName });
   const passwordCorrect =
-    user === null
-      ? false
-      : await bcrypt.compare(body.password, user.passwordHash);
+    user === null ? false : await bcrypt.compare(password, user.hashPassword);
 
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
@@ -28,6 +25,7 @@ loginRouter.post("/", async (request, response) => {
   response
     .status(200)
     .send({ token, username: user.username, name: user.name });
-});
+};
 
-module.exports = loginRouter;
+const SECRET = process.env.SECRET;
+console.log(SECRET);

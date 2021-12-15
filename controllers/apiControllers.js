@@ -2,14 +2,13 @@ const mongoose = require("mongoose");
 const Blogs = require("../db/models/blog");
 const User = require("../db/models/User");
 const jwt = require("jsonwebtoken");
+const env = require("dotenv").config();
+const SECRET = process.env.SECRET;
 
-const getTokenFrom = (request) => {
-  const authorization = request.get("authorization");
-  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
-    return authorization.substring(7);
-  }
-  return null;
-};
+const jwtError = () => ({
+  status: 401,
+  message: { error: "token missing or invalid" },
+});
 
 exports.getAllBlogs = async (request, response) => {
   try {
@@ -22,34 +21,32 @@ exports.getAllBlogs = async (request, response) => {
 
 exports.postBlog = async (request, response, next) => {
   const blog = new Blogs(request.body);
-  const token = getTokenFrom(request);
+  const token = request.token;
+  if (!token) next(jwtError());
   const decodedToken = jwt.verify(token, process.env.SECRET);
-  if (!token || !decodedToken.id) {
-    return response.status(401).json({ error: "token missing or invalid" });
+  if (!decodedToken.id) {
+    next(jwtError());
   }
-  const user = await User.findById(decodedToken.id);
-  const { userId } = request.body;
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(decodedToken.id);
+
     blog.user = user._id;
     const savedBlog = await blog.save();
     user.blogs = user.blogs.concat(savedBlog._id);
-    console.log(user);
-    const savedUser = await user.save();
+    await user.save();
     response.status(201).send(savedBlog);
   } catch (err) {
-    console.log(err);
     next({ status: 400, message: { error: "Bad Request" } });
   }
 };
 
-exports.deleteBlog = async (request, response) => {
+exports.deleteBlog = async (request, response, next) => {
   const { _id } = request.body;
   try {
-    const result = await Blogs.deleteOne({ _id: _id });
-    response.status(200).send(result);
+    jwt.verify(request.token, SECRET);
+    const result = await Blogs.findByIdAndDelete(_id);
+    response.status(200).send({ g: "s" });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };

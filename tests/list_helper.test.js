@@ -100,91 +100,91 @@ const mostLikes = require("../utils/list_helper").mostLikes;
 //   });
 // });
 
-describe("most blogs", () => {
-  test.only("returns the most common author", () => {
-    const blogs = [
-      {
-        _id: "61b762e465a22964f8d270c2",
-        title: "kill bill3",
-        author: "ziv 123",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 470,
-        __v: 0,
-      },
-      {
-        _id: "61b762eb65a22964f8d270c4",
-        title: "kill bas",
-        author: "ziv 123",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 121,
-        __v: 0,
-      },
-      {
-        _id: "61b762fc65a22964f8d270c6",
-        title: "kill bas",
-        author: "roie glass",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 1243,
-        __v: 0,
-      },
-      {
-        _id: "61b7630565a22964f8d270c8",
-        title: "kill bas",
-        author: "ziv 123",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 1243,
-        __v: 0,
-      },
-      {
-        _id: "61b76cb5fe510214bd8554b3",
-        title: "kill bas",
-        author: "ziv 123",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 113,
-        __v: 0,
-      },
-      {
-        _id: "61b76cc0fe510214bd8554b5",
-        title: "kill bas",
-        author: "roie glass",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 113,
-        __v: 0,
-      },
-      {
-        _id: "61b76cc3fe510214bd8554b7",
-        title: "kill bas",
-        author: "roie glass",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 113,
-        __v: 0,
-      },
-      {
-        _id: "61b76cc5fe510214bd8554b9",
-        title: "kill bas",
-        author: "roie glass",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 113,
-        __v: 0,
-      },
-      {
-        _id: "61b76cc6fe510214bd8554bb",
-        title: "kill bas",
-        author: "roie glass",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 113,
-        __v: 0,
-      },
-      {
-        _id: "61b76d801350e6d4fdaf82ab",
-        title: "kill bas",
-        author: "roie glass",
-        url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-        likes: 113,
-        __v: 0,
-      },
-    ];
-    const result = mostLikes(blogs);
-    expect(result).toEqual({ author: "ziv 123", blogs: 3 });
-  });
-});
+// describe("most blogs", () => {
+//   test.only("returns the most common author", () => {
+//     const blogs = [
+//       {
+//         _id: "61b762e465a22964f8d270c2",
+//         title: "kill bill3",
+//         author: "ziv 123",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 470,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b762eb65a22964f8d270c4",
+//         title: "kill bas",
+//         author: "ziv 123",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 121,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b762fc65a22964f8d270c6",
+//         title: "kill bas",
+//         author: "roie glass",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 1243,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b7630565a22964f8d270c8",
+//         title: "kill bas",
+//         author: "ziv 123",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 1243,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b76cb5fe510214bd8554b3",
+//         title: "kill bas",
+//         author: "ziv 123",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 113,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b76cc0fe510214bd8554b5",
+//         title: "kill bas",
+//         author: "roie glass",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 113,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b76cc3fe510214bd8554b7",
+//         title: "kill bas",
+//         author: "roie glass",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 113,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b76cc5fe510214bd8554b9",
+//         title: "kill bas",
+//         author: "roie glass",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 113,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b76cc6fe510214bd8554bb",
+//         title: "kill bas",
+//         author: "roie glass",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 113,
+//         __v: 0,
+//       },
+//       {
+//         _id: "61b76d801350e6d4fdaf82ab",
+//         title: "kill bas",
+//         author: "roie glass",
+//         url: "https://www.linkedin.com/in/nadav-vol-46ab67220/",
+//         likes: 113,
+//         __v: 0,
+//       },
+//     ];
+//     const result = mostLikes(blogs);
+//     expect(result).toEqual({ author: "ziv 123", blogs: 3 });
+//   });
+// });

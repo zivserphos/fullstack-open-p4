@@ -12,17 +12,16 @@ exports.createUser = async (req, res, next) => {
     if (!userName || !name || !password) {
       throw badRequest("missing parameters");
     }
-
-    if (userName.trim.length < 3 || password.trim.length < 3) {
+    if (userName.trim().length < 3 || password.trim().length < 3) {
       throw badRequest("Username or password too short");
     }
-    console.log("dfajghiasjugfoiasiugfsiu");
+
     if (await User.findOne({ userName }))
       throw conflict("userName already exist");
     const hashPassword = await genHashPass(password);
     const newUser = new User({ name, userName, hashPassword });
     const result = await newUser.save();
-    res.status(200).send(result);
+    res.status(201).send(result);
   } catch (err) {
     next(err);
   }
@@ -42,7 +41,6 @@ exports.getAllUsers = async (request, response) => {
 };
 
 const genHashPass = async (password) => {
-  console.log(password);
   return await bcrypt.hash(password, 10);
 };
 const compreHashPASS = async (hashPass, password) =>

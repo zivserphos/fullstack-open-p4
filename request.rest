@@ -1,18 +1,36 @@
-GET http://localhost:3001/api/blogs HTTP/1.1
+# GET http://localhost:3001/api/blogs HTTP/1.1
 
-###
-GET http://localhost:3001/api/blogs/hello HTTP/1.1
+# ###
+# GET http://localhost:3001/api/blogs/hello HTTP/1.1
 
-### 
+# ### 
 POST http://localhost:3001/api/blogs HTTP/1.1
 Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjk5MzlhM2MwZDIzNWIxYTQwN2Y0NCIsImlhdCI6MTYzOTU2Mzg3OH0.bo3FtDtt1hIJxPfNURRIWGMFn-5u2tWoYZ1uODvdHtc
 
 {
-    "title": "kill bas",
+    "title": "koola like",
     "author": "ziv 123",
     "url": "https://www.linkedin.com/in/nadav-vol-46ab67220/",
-    "likes": 113,
-    "userId": "61b8ba25131122a7616cdbda"
+    "userId": "61b8c3c4cbfee92864a731e3"
+}
+###
+
+PUT /api/blogs/likes HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjk5MzlhM2MwZDIzNWIxYTQwN2Y0NCIsImlhdCI6MTYzOTU2Mzg3OH0.bo3FtDtt1hIJxPfNURRIWGMFn-5u2tWoYZ1uODvdHtc
+
+{
+    "_id": "5a422bc61b54a676234d17fc", "likes": "141"
+}
+
+### 
+
+DELETE http://localhost:3001/api/blogs HTTP/1.1
+Content-Type: application/json
+
+{
+"_id": "61b8c3c4cbfee92864a731e3"
 }
 
 ### 
@@ -20,11 +38,24 @@ POST http://localhost:3001/api/users HTTP/1.1
 Content-Type: application/json
 
 { 
-    "name": "shalom asayag",
-    "userName": "shalom_asayag",
-    "password": "x",
-    "blogs": ["Zzzz"]
+    "name": "YUVAL BITTON",
+    "userName": "ADON_OLAM1",
+    "password": "1234",
+    "blogs": []
 }
 
 ###
+POST http://localhost:3001/api/login HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "userName": "ADON_OLAM",
+    "password": "xyz1234"
+}
+
+
+###
 GET http://localhost:3001/api/users HTTP/1.1
+
+
+# # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjk5MzlhM2MwZDIzNWIxYTQwN2Y0NCIsImlhdCI6MTYzOTU1MjI1Nn0.PNlUw7Mi_6UiWLQXxyBoVz3y-LyrKkTt2_kKVe_QImg

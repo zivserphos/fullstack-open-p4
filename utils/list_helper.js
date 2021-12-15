@@ -52,7 +52,6 @@ const mostLikes = (blogs) => {
     if (!authorsArr.includes(blog.author)) authorsArr.push(blog.author);
   });
   authorsArr.forEach((author) => {
-    console.log(author);
     const currentAuthorLikes = authorLikes(
       blogs.filter((blog) => blog.author === author)
     );
