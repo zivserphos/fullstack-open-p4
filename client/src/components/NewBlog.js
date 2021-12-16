@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
+import blogService from "../services/blogs";
 
-export default function NewBlog() {
+export default function NewBlog({ setBlogs, blogs }) {
   const [newBlog, setNewBlog] = useState({});
 
   const authorEl = useRef();

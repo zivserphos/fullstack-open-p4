@@ -28,4 +28,3 @@ exports.login = async (request, response) => {
 };
 
 const SECRET = process.env.SECRET;
-console.log(SECRET);

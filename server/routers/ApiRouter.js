@@ -13,8 +13,8 @@ router.get("/hello", (req, res) => {
     { content: "HTML is easy", xxo: "HTML is easy" },
   ]);
 });
+router.put("/likes", updateLikes);
 router.post("/", postBlog);
 router.delete("/", deleteBlog);
-router.put("/likes", updateLikes);
 
 module.exports = router;

@@ -11,7 +11,6 @@ const jwtError = () => ({
 });
 
 exports.getAllBlogs = async (request, response) => {
-  console.log("im here");
   try {
     const blogs = await Blogs.find({});
     response.json(blogs);
@@ -21,7 +20,6 @@ exports.getAllBlogs = async (request, response) => {
 };
 
 exports.postBlog = async (request, response, next) => {
-  console.log(request.body);
   const blog = new Blogs(request.body);
   const token = request.token;
   if (!token) next(jwtError());
@@ -43,6 +41,7 @@ exports.postBlog = async (request, response, next) => {
 };
 
 exports.deleteBlog = async (request, response, next) => {
+  console.log(request.body);
   const { _id } = request.body;
   try {
     jwt.verify(request.token, SECRET);
@@ -55,10 +54,11 @@ exports.deleteBlog = async (request, response, next) => {
 
 exports.updateLikes = async (request, response) => {
   try {
-    const { _id, likes } = request.body;
-    await Blogs.updateOne({ _id }, { $set: { likes } });
-    const updatedBlog = await Blogs.findOne({ _id });
-    response.status(200).send(updatedBlog);
+    const { id } = request.body;
+    const blog = await Blogs.findById(id);
+    blog.likes += 1;
+    await blog.save();
+    response.status(200).send(blog);
   } catch (err) {
     next({ status: 400, message: { error: "BAD REQUEST" } });
   }

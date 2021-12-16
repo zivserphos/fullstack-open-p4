@@ -4,6 +4,7 @@ import LoginForm from "./components/LoginForm";
 import blogService from "./services/blogs";
 import { useNavigate } from "react-router-dom";
 import { isLoggedIn, logOut } from "./services/userService";
+import NewBlog from "./components/NewBlog";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -23,13 +24,11 @@ const App = () => {
     }
   }, []);
 
-  console.log(user);
-
   useEffect(() => {
     if (!user) return;
     blogService.getAll().then((blogs) => {
-      console.log(blogs);
-      return setBlogs(blogs);
+      const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
+      return setBlogs(sortedBlogs);
     });
   }, [user]);
 
@@ -41,14 +40,13 @@ const App = () => {
       </div>
     );
   }
-
   return (
     <div>
       <h2>blogs</h2>
       {blogs.map((blog) => {
         return <Blog key={blog.id} blog={blog} />;
       })}
-
+      <NewBlog setBlogs={setBlogs} blogs={blogs} />
       <div>
         <button
           onClick={() => {
