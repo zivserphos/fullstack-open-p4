@@ -1,16 +1,21 @@
 import { login } from "../services/userService";
-import { useState } from "react";
+import React from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginForm({ setUser }) {
+const LoginForm = ({ setUser }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [cancel, setCancel] = useState("none");
+  const [displayForm, setDisplayForm] = useState("none");
+
+  const loginFormEl = useRef();
+  const cancelButtonEl = useRef();
 
   const navigate = useNavigate();
-
   return (
-    <form>
-      <div>
+    <form ref={loginFormEl}>
+      <div style={{ display: displayForm }}>
         UserName
         <input
           type="text"
@@ -19,7 +24,7 @@ export default function LoginForm({ setUser }) {
           onChange={({ target }) => setUserName(target.value)}
         ></input>
       </div>
-      <div>
+      <div style={{ display: displayForm }}>
         Password
         <input
           type="text"
@@ -31,6 +36,12 @@ export default function LoginForm({ setUser }) {
       <button
         type="submit"
         onClick={async (event) => {
+          event.preventDefault();
+          if (displayForm === "none") {
+            setDisplayForm("block");
+            setCancel("block");
+            return;
+          }
           if (await login(event, userName, password)) {
             navigate("/blogs");
             return setUser(userName);
@@ -40,6 +51,21 @@ export default function LoginForm({ setUser }) {
       >
         LOGIN
       </button>
+      <div>
+        <button
+          type="button"
+          style={{ display: cancel }}
+          onClick={() => {
+            setCancel("none");
+            setDisplayForm("none");
+          }}
+          ref={cancelButtonEl}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
-}
+};
+
+export default LoginForm;

@@ -18,8 +18,8 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
-const create = async (e, newObject) => {
-  e.preventDefault();
+const create = async (newObject) => {
+  console.log(newObject);
   const config = {
     headers: { Authorization: token },
   };

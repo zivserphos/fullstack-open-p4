@@ -21,6 +21,7 @@ exports.getAllBlogs = async (request, response) => {
 };
 
 exports.postBlog = async (request, response, next) => {
+  console.log(request.body);
   const blog = new Blogs(request.body);
   const token = request.token;
   if (!token) next(jwtError());

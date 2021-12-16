@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import blogService from "./blogs";
 const base_url_path = "http://localhost:3003/api/login";
 
 export const login = async (event, userName, password) => {
@@ -10,6 +11,7 @@ export const login = async (event, userName, password) => {
       { userName, password },
       basicHeaders
     );
+    blogService.setToken(data.token);
     window.localStorage.setItem("User", JSON.stringify(data));
     return true;
   } catch (err) {
