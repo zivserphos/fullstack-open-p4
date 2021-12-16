@@ -11,6 +11,7 @@ const jwtError = () => ({
 });
 
 exports.getAllBlogs = async (request, response) => {
+  console.log("im here");
   try {
     const blogs = await Blogs.find({});
     response.json(blogs);

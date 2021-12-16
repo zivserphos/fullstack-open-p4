@@ -10,22 +10,27 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-const getAll = async () => {
-  try {
-    const { data } = axios.get(base_url_path);
-    return data;
-  } catch (err) {
-    notyf.error(err.message);
-  }
-};
-
-const create = async (newObject) => {
+const getAll = () => {
   const config = {
     headers: { Authorization: token },
   };
+  const request = axios.get(base_url_path, config);
+  return request.then((response) => response.data);
+};
 
-  const response = await axios.post(base_url_path, newObject, config);
-  return response.data;
+const create = async (e, newObject) => {
+  e.preventDefault();
+  const config = {
+    headers: { Authorization: token },
+  };
+  try {
+    newObject.userId = JSON.parse(window.localStorage.getItem("User")).id;
+    const response = await axios.post(base_url_path, newObject, config);
+    notyf.success("added a new blog");
+    return response.data;
+  } catch (err) {
+    notyf.error(err.response.data.error);
+  }
 };
 
 const update = async (id, newObject) => {

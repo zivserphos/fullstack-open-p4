@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const User = require("../db/models/User");
 
 exports.login = async (request, response) => {
-  console.log("im her4e");
   const { userName, password } = request.body;
   const user = await User.findOne({ userName });
   const passwordCorrect =
@@ -25,7 +24,7 @@ exports.login = async (request, response) => {
 
   response
     .status(200)
-    .send({ token, username: user.username, name: user.name });
+    .send({ token, username: user.username, name: user.name, id: user._id });
 };
 
 const SECRET = process.env.SECRET;
