@@ -35,13 +35,13 @@ Content-Type: application/json
 }
 
 ### 
-POST http://localhost:3001/api/users HTTP/1.1
+POST http://localhost:3003/api/users HTTP/1.1
 Content-Type: application/json
 
 { 
-    "name": "YUVAL BITTON",
-    "userName": "ADON_OLAM1",
-    "password": "1234",
+    "name": "zufer avdia",
+    "userName": "avdia",
+    "password": "12345",
     "blogs": []
 }
 

@@ -34,6 +34,7 @@ const LoginForm = ({ setUser }) => {
         ></input>
       </div>
       <button
+        id="login-btn"
         type="submit"
         onClick={async (event) => {
           event.preventDefault();
