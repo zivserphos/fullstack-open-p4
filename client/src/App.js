@@ -8,7 +8,6 @@ import NewBlog from "./components/NewBlog";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [user, setUser] = useState(null);
@@ -43,9 +42,18 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      {blogs.map((blog) => {
-        return <Blog key={blog.id} blog={blog} />;
-      })}
+      <ul style={{ "list-style-type": "none" }}>
+        {blogs.map((blog) => {
+          return (
+            <Blog
+              key={blog._id}
+              blog={blog}
+              setBlogs={setBlogs}
+              blogs={blogs}
+            />
+          );
+        })}
+      </ul>
       <NewBlog setBlogs={setBlogs} blogs={blogs} />
       <div>
         <button

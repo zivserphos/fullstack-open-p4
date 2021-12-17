@@ -41,12 +41,11 @@ exports.postBlog = async (request, response, next) => {
 };
 
 exports.deleteBlog = async (request, response, next) => {
-  console.log(request.body);
-  const { _id } = request.body;
+  const { id } = request.body;
   try {
     jwt.verify(request.token, SECRET);
-    const result = await Blogs.findByIdAndDelete(_id);
-    response.status(200).send({ g: "s" });
+    const result = await Blogs.findByIdAndDelete(id);
+    response.status(200).send(result);
   } catch (err) {
     next(err);
   }

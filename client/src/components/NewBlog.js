@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import blogService from "../services/blogs";
 
-export default function NewBlog({ setBlogs, blogs }) {
+export default function NewBlog({ setBlogs, blogs, blog, addBlogTest }) {
   const [newBlog, setNewBlog] = useState({});
 
   const authorEl = useRef();
@@ -19,6 +19,7 @@ export default function NewBlog({ setBlogs, blogs }) {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
+          addBlogTest(blog);
           const response = await blogService.create({
             author: authorEl.current.value,
             title: titleEl.current.value,
@@ -50,7 +51,9 @@ export default function NewBlog({ setBlogs, blogs }) {
             ref={urlEl}
             onChange={({ target }) => handleChange("url", target.value)}
           ></input>
-          <button type="submit">Create</button>
+          <button type="submit" className="addBlogBtn">
+            Create
+          </button>
         </div>
       </form>
     </div>

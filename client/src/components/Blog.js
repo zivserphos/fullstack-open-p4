@@ -1,23 +1,20 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
+const notyf = new Notyf();
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, setBlogs, blogs, addLike2 }) => {
   const [visibleBlog, setVisibleBlog] = useState(false);
   const [buttonText, setButtonText] = useState("read more");
   const [likes, setLikes] = useState(blog.likes);
 
-  const deleteBlog = async (id) => {
-    const res = await axios.delete(`${baseUrl}/${id}`, {
-      headers: {
-        authorization:
-          "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imtha2EiLCJpZCI6IjYxYjhjZDE2YTMzOGNkNTJiZDkyNzUzMSIsImlhdCI6MTYzOTU4MTM1M30.dRd1FsS-hwqIqu05HTk_POtNgCKW-T1mxDusZs1OF90",
-      },
-      data: { id },
-    });
-    return res.data;
-  };
-
-  const token = JSON.parse(localStorage.getItem("User")).token;
+  let token = "";
+  try {
+    token = JSON.parse(localStorage.getItem("User")).token;
+  } catch (err) {
+    token = "";
+  }
   const config = {
     headers: {
       Authorization: `bearer ${token}`,
@@ -26,9 +23,22 @@ const Blog = ({ blog }) => {
   };
 
   const deleteBlog = async () => {
-    await axios.delete("http://localhost:3003/api/blogs", config, {
-      data: { id: blog._id },
-    });
+    config.data = { id: blog._id };
+    try {
+      const response = await axios.delete(
+        "http://localhost:3003/api/blogs",
+        config
+      );
+      const updatedBlogs = [...blogs];
+      const index = updatedBlogs.findIndex(
+        (someBlog) => someBlog._id === blog._id
+      );
+      updatedBlogs.splice(index, 1);
+      setBlogs(updatedBlogs);
+      notyf.success("blog has been deleted");
+    } catch (err) {
+      notyf.error(err.response.data.error);
+    }
   };
 
   const addLike = async () => {
@@ -39,6 +49,17 @@ const Blog = ({ blog }) => {
     );
     setLikes(likes + 1);
   };
+  let removeBlog = <></>;
+  if (localStorage.getItem("User")) {
+    const isUserBlog =
+      blog.user === JSON.parse(localStorage.getItem("User")).id ? true : false;
+    if (isUserBlog)
+      removeBlog = (
+        <div key="remove">
+          <button onClick={deleteBlog}>remove</button>
+        </div>
+      );
+  }
 
   const changeButtonText = () =>
     setButtonText(buttonText === "read more" ? "show less" : "read more");
@@ -46,14 +67,15 @@ const Blog = ({ blog }) => {
   const ChangeBlogDisplay = () => setVisibleBlog(visibleBlog ? false : true);
 
   return (
-    <div>
-      <div>
+    <li>
+      <div key="author" className="basic-details">
         <b>author:</b> {blog.author}
       </div>
-      <div>
+      <div key="title" style={{ display: "inline" }}>
         <b> title:</b> {blog.title}
       </div>
       <button
+        key={"displayButton"}
         onClick={() => {
           changeButtonText();
           ChangeBlogDisplay();
@@ -61,19 +83,26 @@ const Blog = ({ blog }) => {
       >
         {buttonText}
       </button>
-      <div style={display}>
-        <div>
+      <div style={display} key="extra info" className="extra-info">
+        <div key="likes">
           <b>likes</b>: {likes}
-          <button onClick={addLike}>like</button>
+          <button
+            key="likeButton"
+            onClick={() => {
+              addLike();
+              addLike2();
+            }}
+            className={"addLike"}
+          >
+            like
+          </button>
         </div>
-        <div>
+        <div key="url">
           <b>url:</b> {blog.url}
         </div>
-        <div>
-          <button onClick={deleteBlog}>remove</button>
-        </div>
+        {removeBlog}
       </div>
-    </div>
+    </li>
   );
 };
 
