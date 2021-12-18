@@ -1,5 +1,5 @@
 GET http://localhost:3003/api/blogs HTTP/1.1
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjk5MzlhM2MwZDIzNWIxYTQwN2Y0NCIsImlhdCI6MTYzOTY0MDk2OX0.FX2R8hnAWikrrBzMT_rKFNM9fmRYe8AJQxSmu9Mcyjs
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYmRiODQ0OTI5MDE2OGU1ZTVmOTM2ZSIsImlhdCI6MTYzOTgyMzQyOH0.zvUqGvvnwR_KYQB1_Pc-fiP1otPcym4ITP8uoROJqB0
 
 # ###
 # GET http://localhost:3001/api/blogs/hello HTTP/1.1
@@ -59,4 +59,3 @@ Content-Type: application/json
 GET http://localhost:3001/api/users HTTP/1.1
 
 
-# # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYjk5MzlhM2MwZDIzNWIxYTQwN2Y0NCIsImlhdCI6MTYzOTU1MjI1Nn0.PNlUw7Mi_6UiWLQXxyBoVz3y-LyrKkTt2_kKVe_QImg

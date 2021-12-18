@@ -19,18 +19,18 @@ export default function NewBlog({ setBlogs, blogs, blog, addBlogTest }) {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          addBlogTest(blog);
           const response = await blogService.create({
             author: authorEl.current.value,
             title: titleEl.current.value,
             url: urlEl.current.value,
           });
-          setBlogs([...blogs, response]);
+          if (response) setBlogs([...blogs, response]);
         }}
       >
         <div>
           <b>title:</b>
           <input
+            id="title-input"
             type="text"
             ref={titleEl}
             onChange={({ target }) => handleChange("title", target.value)}
@@ -39,6 +39,7 @@ export default function NewBlog({ setBlogs, blogs, blog, addBlogTest }) {
         <div>
           <b>author:</b>
           <input
+            id="author-input"
             type="text"
             ref={authorEl}
             onChange={({ target }) => handleChange("author", target.value)}
@@ -47,11 +48,12 @@ export default function NewBlog({ setBlogs, blogs, blog, addBlogTest }) {
         <div>
           <b>url:</b>
           <input
+            id="url-input"
             type="text"
             ref={urlEl}
             onChange={({ target }) => handleChange("url", target.value)}
           ></input>
-          <button type="submit" className="addBlogBtn">
+          <button type="submit" className="addBlogBtn" id="createBlog">
             Create
           </button>
         </div>

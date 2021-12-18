@@ -4,23 +4,30 @@ import "notyf/notyf.min.css";
 const notyf = new Notyf();
 const base_url_path = "http://localhost:3003/api/blogs";
 
-let token = null;
+let token;
 
 const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
 const getAll = () => {
+  if (!localStorage.getItem("User")) return;
+  token = JSON.parse(localStorage.getItem("User")).token;
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: `bearer ${token}` },
   };
   const request = axios.get(base_url_path, config);
   return request.then((response) => response.data);
 };
 
 const create = async (newObject) => {
+  if (!newObject.author || !newObject.title || !newObject.url) {
+    notyf.error("Bad Request");
+    return false;
+  }
+  token = JSON.parse(localStorage.getItem("User")).token;
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: `bearer ${token}` },
   };
   try {
     newObject.userId = JSON.parse(window.localStorage.getItem("User")).id;

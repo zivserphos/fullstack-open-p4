@@ -42,7 +42,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <ul style={{ "list-style-type": "none" }}>
+      <ul style={{ listStyleType: "none" }}>
         {blogs.map((blog) => {
           return (
             <Blog

@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import blogService from "./blogs";
+import { Notyf } from "notyf";
 const base_url_path = "http://localhost:3003/api/login";
+
+const notyf = new Notyf();
 
 export const login = async (event, userName, password) => {
   try {
@@ -15,7 +18,7 @@ export const login = async (event, userName, password) => {
     window.localStorage.setItem("User", JSON.stringify(data));
     return true;
   } catch (err) {
-    return false;
+    notyf.error(err.response.data.error);
   }
 };
 

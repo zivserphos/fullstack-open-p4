@@ -1,3 +1,14 @@
+Cypress.Commands.add(
+  "CreateUser",
+  ({ name, userName, password, blogs, likes }) => {
+    cy.request({
+      url: "http://localhost:3003/api/users",
+      method: "POST",
+      body: { name, userName, password, blogs, likes },
+    });
+  }
+);
+
 Cypress.Commands.add("login", ({ userName, password }) => {
   cy.request("POST", "http://localhost:3003/api/login", {
     userName,
@@ -8,7 +19,8 @@ Cypress.Commands.add("login", ({ userName, password }) => {
   });
 });
 
-Cypress.Commands.add("createBlog", ({ content, important }) => {
+Cypress.Commands.add("createBlog", ({ title, author, url, userId }) => {
+  console.log(userId);
   cy.request({
     url: "http://localhost:3003/api/blogs",
     method: "POST",

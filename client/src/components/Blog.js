@@ -75,6 +75,7 @@ const Blog = ({ blog, setBlogs, blogs, addLike2 }) => {
         <b> title:</b> {blog.title}
       </div>
       <button
+        id="display-btn"
         key={"displayButton"}
         onClick={() => {
           changeButtonText();
@@ -90,7 +91,6 @@ const Blog = ({ blog, setBlogs, blogs, addLike2 }) => {
             key="likeButton"
             onClick={() => {
               addLike();
-              addLike2();
             }}
             className={"addLike"}
           >

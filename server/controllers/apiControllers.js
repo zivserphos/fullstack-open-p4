@@ -20,6 +20,7 @@ exports.getAllBlogs = async (request, response) => {
 };
 
 exports.postBlog = async (request, response, next) => {
+  console.log("im here");
   const blog = new Blogs(request.body);
   const token = request.token;
   if (!token) next(jwtError());
@@ -34,6 +35,7 @@ exports.postBlog = async (request, response, next) => {
     const savedBlog = await blog.save();
     user.blogs = user.blogs.concat(savedBlog._id);
     await user.save();
+    console.log(savedBlog);
     response.status(201).send(savedBlog);
   } catch (err) {
     next({ status: 400, message: { error: "Bad Request" } });
