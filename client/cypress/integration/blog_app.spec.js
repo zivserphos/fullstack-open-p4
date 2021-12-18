@@ -62,11 +62,44 @@ describe("Blog app", function () {
         });
       });
 
-      it.only("user can like any blog he wants to", function () {
-        const likesAtStart = cy.contains("likes");
-        console.log(likesAtStart);
+      it("user can like any blog he wants to", function () {
         cy.get("#display-btn").click();
+        cy.contains("likes: 0");
         cy.get(".addLike").click();
+        cy.contains("likes: 1");
+        cy.get(".addLike").click();
+        cy.contains("likes: 2");
+      });
+
+      it("user can delete his own blog", function () {
+        cy.get("#display-btn").click();
+        cy.get("#remove-blog").click();
+        cy.get(".notyf__toast--success").contains("blog has been deleted");
+      });
+      it.only("sorts the blogs by the number of likes", function () {
+        cy.get("#title-input").type("hello world");
+        cy.get("#author-input").type("bob");
+        cy.get("#url-input").type("http://test.com");
+        cy.get("#createBlog").click();
+
+        cy.get(".blog")
+          .should("have.length", 2)
+          .then(() => {
+            let i = 0;
+            cy.get("#display-btn").each((btn) => {
+              if (btn[0].innerText === "read more") {
+                i++;
+                if (i === 2) {
+                  btn.trigger("click");
+                }
+              }
+            });
+          });
+        cy.get(".addLike").click();
+
+        cy.wait(1000);
+
+        cy.get(".blog:first>.title").should("have.text", "hello world2");
       });
     });
   });

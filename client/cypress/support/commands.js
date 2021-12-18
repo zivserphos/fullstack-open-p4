@@ -19,7 +19,7 @@ Cypress.Commands.add("login", ({ userName, password }) => {
   });
 });
 
-Cypress.Commands.add("createBlog", ({ title, author, url, userId }) => {
+Cypress.Commands.add("createBlog", ({ title, author, url, userId, token }) => {
   console.log(userId);
   cy.request({
     url: "http://localhost:3003/api/blogs",

@@ -56,7 +56,9 @@ const Blog = ({ blog, setBlogs, blogs, addLike2 }) => {
     if (isUserBlog)
       removeBlog = (
         <div key="remove">
-          <button onClick={deleteBlog}>remove</button>
+          <button onClick={deleteBlog} id="remove-blog">
+            remove
+          </button>
         </div>
       );
   }
@@ -67,7 +69,7 @@ const Blog = ({ blog, setBlogs, blogs, addLike2 }) => {
   const ChangeBlogDisplay = () => setVisibleBlog(visibleBlog ? false : true);
 
   return (
-    <li>
+    <li className={"blog"}>
       <div key="author" className="basic-details">
         <b>author:</b> {blog.author}
       </div>
